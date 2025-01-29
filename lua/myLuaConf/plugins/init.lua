@@ -81,6 +81,10 @@ require('lze').load {
       end
       require("nvim-tree").setup {
         on_attach = my_on_attach,
+        -- When a file is opened, show it on the tree automatically
+        update_focused_file = {
+          enable = true,
+        },
       }
     end,
   },
