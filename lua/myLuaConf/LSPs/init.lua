@@ -68,7 +68,12 @@ end
 -- PG: Support Rust
 -- TODO: Check for the presence of rust
 if true then
+  local on_attach = function(client, bufnr)
+    -- require("completion").on_attach(client) -- i think this is already handled
+    vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+  end
   servers.rust_analyzer = {
+    on_attach = on_attach,
     imports = {
       granularity = {
         group = "module",
@@ -134,10 +139,14 @@ require('lze').load {
     after = function(plugin)
       if require('nixCatsUtils').isNixCats then
         for server_name, cfg in pairs(servers) do
+          -- PG: custom on_attach
+          local on_attach = cfg.on_attach
+          cfg["on_attach"] = nil
           require('lspconfig')[server_name].setup({
             capabilities = require('myLuaConf.LSPs.caps-on_attach').get_capabilities(server_name),
             -- this line is interchangeable with the above LspAttach autocommand
             -- on_attach = require('myLuaConf.LSPs.caps-on_attach').on_attach,
+            on_attach = on_attach,  -- PG: custom on_attach
             settings = cfg,
             filetypes = (cfg or {}).filetypes,
             cmd = (cfg or {}).cmd,
