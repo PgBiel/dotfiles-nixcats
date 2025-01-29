@@ -11,6 +11,11 @@ function M.on_attach(_, bufnr)
     vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
   end
 
+  -- PG: Toggle inline diagnostics (https://github.com/WhoIsSethDaniel/toggle-lsp-diagnostics.nvim)
+  nmap('<leader>td', function()
+    vim.diagnostic.enable(not vim.diagnostic.is_enabled())
+  end, '[T]oggle inline [D]iagnostics')
+
   nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
   nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
 
