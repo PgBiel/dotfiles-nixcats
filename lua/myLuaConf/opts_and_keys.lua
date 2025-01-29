@@ -42,15 +42,24 @@ vim.wo.number = true
 -- Enable mouse mode
 vim.o.mouse = 'a'
 
--- Indent
-vim.o.smarttab = true
+-- Indent defaults (4 spaces)
+-- vim.o.smarttab = true
 vim.opt.cpoptions:append('I')
--- vim.o.expandtab = true
+vim.o.expandtab = true
 -- vim.o.smartindent = true
 -- vim.o.autoindent = true
--- vim.o.tabstop = 4
--- vim.o.softtabstop = 4
--- vim.o.shiftwidth = 4
+vim.o.tabstop = 4
+vim.o.softtabstop = 4
+vim.o.shiftwidth = 4
+
+-- PG: Options above
+-- Plus keymaps below from:
+-- https://stackoverflow.com/questions/68797360/how-to-set-tab-key-to-indent-text-on-nvim-without-errors
+vim.keymap.set("n", "<Tab>", ">>_", { desc = 'Indent' })
+vim.keymap.set("n", "<S-Tab>", "<<_", { desc = 'Dedent' })
+vim.keymap.set("i", "<S-Tab>", "<C-D>", { desc = 'Dedent' })
+vim.keymap.set("v", "<Tab>", ">gv", { desc = 'Indent' })
+vim.keymap.set("v", "<S-Tab>", "<gv", { desc = 'Dedent' })
 
 -- stops line wrapping from being confusing
 vim.o.breakindent = true
@@ -81,7 +90,8 @@ vim.o.termguicolors = true
 vim.api.nvim_create_autocmd("FileType", {
   desc = "remove formatoptions",
   callback = function()
-    vim.opt.formatoptions:remove({ "c", "r", "o" })
+    -- PG: Let's keep that
+    -- vim.opt.formatoptions:remove({ "c", "r", "o" })
   end,
 })
 
