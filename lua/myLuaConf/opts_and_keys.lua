@@ -128,6 +128,12 @@ vim.keymap.set("n", "<leader><leader>d", "<cmd>bprevious<CR><cmd>bdelete #<CR>",
 vim.keymap.set("n", "<leader><leader>D", "<cmd>bdelete<CR>", { desc = 'delete this buffer' })
 vim.keymap.set("n", "<leader>Tt", "<cmd>belowright split<CR><cmd>terminal<CR>", { desc = "open terminal" })
 
+-- PG: save on Ctrl-S
+-- see https://stackoverflow.com/questions/3446320/in-vim-how-to-map-save-to-ctrl-s
+vim.keymap.set("n", "<C-s>", "<cmd>w<CR>", { desc = "Save" })
+vim.keymap.set("i", "<C-s>", "<Esc><cmd>w<CR>i", { desc = "Save" })
+vim.keymap.set("v", "<C-s>", "<Esc><cmd>w<CR>", { desc = "Save" })
+
 -- see help sticky keys on windows
 vim.cmd([[command! W w]])
 vim.cmd([[command! Wq wq]])
