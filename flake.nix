@@ -44,6 +44,11 @@
     #   flake = false;
     # };
 
+    "plugins-nvim-tree" = {
+      url = "github:nvim-tree/nvim-tree.lua";
+      flake = false;
+    };
+
     # neovim-nightly-overlay = {
     #   url = "github:nix-community/neovim-nightly-overlay";
     # };
@@ -150,6 +155,9 @@
             lze
             vim-repeat
             plenary-nvim
+
+            # PG: nvim-tree
+            pkgs.neovimPlugins.nvim-tree
           ];
           extra = [
             oil-nvim

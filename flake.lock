@@ -31,10 +31,27 @@
         "type": "github"
       }
     },
+    "plugins-nvim-tree": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1737938017,
+        "narHash": "sha256-wliENqMjuw+DDcyddQlgO6JFBSJHwIGRqjUMqiU79M4=",
+        "owner": "nvim-tree",
+        "repo": "nvim-tree.lua",
+        "rev": "d05881f65f0a653db8d830ccc4d2e07d6a720628",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nvim-tree",
+        "repo": "nvim-tree.lua",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "nixCats": "nixCats",
         "nixpkgs": "nixpkgs",
+        "plugins-nvim-tree": "plugins-nvim-tree"
       }
     }
   },

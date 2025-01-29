@@ -7,6 +7,33 @@ end
 -- this is just an example, feel free to do a better job!
 vim.cmd.colorscheme(colorschemeName)
 
+-- PG: Add nvim-tree for directory browsing
+if nixCats('general.always') then
+  local outer_api = require "nvim-tree.api"
+  local function my_on_attach(bufnr)
+    local api = require "nvim-tree.api"
+    local function opts(desc)
+      return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+    end
+
+    -- default mappings
+    api.config.mappings.default_on_attach(bufnr)
+
+    -- custom mappings
+    vim.keymap.set("n", "<C-t>", api.tree.change_root_to_parent,        opts("Up"))
+    vim.keymap.set("n", "?",     api.tree.toggle_help,                  opts("Help"))
+  end
+
+  vim.keymap.set("n", "<leader>tt", outer_api.tree.toggle, { desc = "nvim-tree: Toggle tree", noremap = true, silent = true, nowait = true })
+
+  vim.g.loaded_netrw = 1
+  vim.g.loaded_netrwPlugin = 1
+
+  require("nvim-tree").setup {
+    on_attach = my_on_attach,
+  }
+end
+
 -- NOTE: you can check if you included the category with the thing wherever you want.
 if nixCats('general.extra') then
   -- I didnt want to bother with lazy loading this.
