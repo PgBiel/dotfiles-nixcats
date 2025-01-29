@@ -7,33 +7,6 @@ end
 -- this is just an example, feel free to do a better job!
 vim.cmd.colorscheme(colorschemeName)
 
--- PG: Add nvim-tree for directory browsing
-if nixCats('general.always') then
-  local outer_api = require "nvim-tree.api"
-  local function my_on_attach(bufnr)
-    local api = require "nvim-tree.api"
-    local function opts(desc)
-      return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
-    end
-
-    -- default mappings
-    api.config.mappings.default_on_attach(bufnr)
-
-    -- custom mappings
-    vim.keymap.set("n", "<C-t>", api.tree.change_root_to_parent,        opts("Up"))
-    vim.keymap.set("n", "?",     api.tree.toggle_help,                  opts("Help"))
-  end
-
-  vim.keymap.set("n", "<leader>tt", outer_api.tree.toggle, { desc = "nvim-tree: Toggle tree", noremap = true, silent = true, nowait = true })
-
-  vim.g.loaded_netrw = 1
-  vim.g.loaded_netrwPlugin = 1
-
-  require("nvim-tree").setup {
-    on_attach = my_on_attach,
-  }
-end
-
 -- NOTE: you can check if you included the category with the thing wherever you want.
 if nixCats('general.extra') then
   -- I didnt want to bother with lazy loading this.
@@ -78,6 +51,39 @@ require('lze').load {
   { import = "myLuaConf.plugins.telescope", },
   { import = "myLuaConf.plugins.treesitter", },
   { import = "myLuaConf.plugins.completion", },
+
+  -- PG: Add nvim-tree for directory browsing
+  -- Loads lazily on the commands and keys below
+  {
+    "nvim-tree",
+    for_cat = "general.always",
+    cmd = { "NvimTreeToggle", "NvimTreeOpen", "NvimTreeClose", "NvimTreeFocus" },
+    keys = {
+      {"<leader>tt", "<cmd>NvimTreeToggle <CR>", mode = "n", noremap = true, desc = "Toggle nvim-tree"},
+    },
+    before = function(_)
+      vim.g.loaded_netrw = 1
+      vim.g.loaded_netrwPlugin = 1
+    end,
+    after = function(_)
+      local function my_on_attach(bufnr)
+        local api = require "nvim-tree.api"
+        local function opts(desc)
+          return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+        end
+
+        -- default mappings
+        api.config.mappings.default_on_attach(bufnr)
+
+        -- custom mappings
+        vim.keymap.set("n", "<C-t>", api.tree.change_root_to_parent,        opts("Up"))
+        vim.keymap.set("n", "?",     api.tree.toggle_help,                  opts("Help"))
+      end
+      require("nvim-tree").setup {
+        on_attach = my_on_attach,
+      }
+    end,
+  },
   {
     "lazydev.nvim",
     for_cat = 'neonixdev',
