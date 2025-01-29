@@ -65,6 +65,27 @@ if nixCats('go') then
   servers.gopls = {}
 end
 
+-- PG: Support Rust
+-- TODO: Check for the presence of rust
+if true then
+  servers.rust_analyzer = {
+    imports = {
+      granularity = {
+        group = "module",
+      },
+      prefix = "self",
+    },
+    cargo = {
+      buildScripts = {
+        enable = true,
+      },
+    },
+    procMacro = {
+      enable = true
+    },
+  }
+end
+
 -- This is this flake's version of what kickstarter has set up for mason handlers.
 -- This is a convenience function that calls lspconfig on the lsps we downloaded via nix
 -- This will not download your lsp. Nix does that.
