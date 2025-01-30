@@ -74,6 +74,12 @@ if true then
   end
   servers.rust_analyzer = {
     on_attach = on_attach,
+    diagnostics = {
+      enable = true,
+      experimental = {
+        enable = true,
+      },
+    },
     imports = {
       granularity = {
         group = "module",
