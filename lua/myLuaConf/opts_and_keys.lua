@@ -134,6 +134,9 @@ vim.keymap.set("n", "<C-s>", "<cmd>w<CR>", { desc = "Save" })
 vim.keymap.set("i", "<C-s>", "<Esc><cmd>w<CR>i", { desc = "Save" })
 vim.keymap.set("v", "<C-s>", "<Esc><cmd>w<CR>", { desc = "Save" })
 
+-- PG: <C-I> and <Tab> are the same on terminals, so remap Ctrl+P to Ctrl+I
+vim.keymap.set("n", "<C-p>", "<C-I>", { remap = false })
+
 -- see help sticky keys on windows
 vim.cmd([[command! W w]])
 vim.cmd([[command! Wq wq]])
