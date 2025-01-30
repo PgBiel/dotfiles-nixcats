@@ -252,6 +252,10 @@
             vim-fugitive
             vim-rhubarb
             nvim-surround
+
+            # PG: Cool and featureful scrollbar
+            nvim-scrollbar
+            nvim-hlslens
           ];
           extra = with pkgs.vimPlugins; [
             fidget-nvim

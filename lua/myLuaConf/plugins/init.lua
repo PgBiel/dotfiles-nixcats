@@ -88,6 +88,51 @@ require('lze').load {
       }
     end,
   },
+  -- PG: Scrollbar showing git info, search results, diagnostics
+  {
+    "nvim-scrollbar",
+    for_cat = "general.always",
+    event = "DeferredUIEnter",
+    dep_of = "nvim-hlslens", -- Ensure hlslens is initialized after scrollbar to use its hook
+    after = function(_)
+      local colors = require("dracula").colors()
+      require("scrollbar").setup({
+        marks = {
+          Cursor = { color = colors.white },
+          -- Otherwise unreadable on dracula theme
+          Search = { color = colors.orange },
+          Misc = { color = colors.white },
+          Error = { color = colors.red },
+          Warn = { color = colors.yellow },
+          Info = { color = colors.bright_cyan },
+        },
+      })
+
+      -- Integrate gitsigns with scrollbar
+      -- (scrollbar is in gitsigns dep-of so it runs afterwards)
+      require("scrollbar.handlers.gitsigns").setup()
+    end,
+  },
+  -- PG: hlslens for advanced search results
+  {
+    "nvim-hlslens",
+    for_cat = "general.always",
+    event = "DeferredUIEnter",
+    keys = {
+      -- {'/', [[<Cmd>execute("normal /\\<CR>")<CR>]], mode = 'n', remap = false, silent = true }, -- TODO: Trigger on search
+      {'n', [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]], mode = 'n', remap = false, silent = true},
+      {'N', [[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]], mode = 'n', remap = false, silent = true},
+      {'*', [[*<Cmd>lua require('hlslens').start()<CR>]],  mode = 'n', remap = false, silent = true},
+      {'#', [[#<Cmd>lua require('hlslens').start()<CR>]],  mode = 'n', remap = false, silent = true},
+      {'g*', [[g*<Cmd>lua require('hlslens').start()<CR>]], mode = 'n', remap = false, silent = true},
+      {'g#', [[g#<Cmd>lua require('hlslens').start()<CR>]], mode = 'n', remap = false, silent = true},
+      {'<Leader>l', '<Cmd>noh<CR>', mode = 'n', remap = false, silent = true},
+    },
+    after = function(_)
+      -- (Note: this replaces hlslens' original setup)
+      require("scrollbar.handlers.search").setup()
+    end,
+  },
   {
     "lazydev.nvim",
     for_cat = 'neonixdev',
@@ -232,6 +277,7 @@ require('lze').load {
   {
     "gitsigns.nvim",
     for_cat = 'general.always',
+    dep_of = "nvim-scrollbar",  -- PG: Ensure scrollbar is initialized after gitsigns
     event = "DeferredUIEnter",
     -- cmd = { "" },
     -- ft = "",
