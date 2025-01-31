@@ -64,12 +64,29 @@
         "type": "github"
       }
     },
+    "plugins-workspace-diagnostics-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1723294887,
+        "narHash": "sha256-lBj4KUPmmhtpffYky/HpaTwY++d/Q9socp/Ys+4VeX0=",
+        "owner": "artemave",
+        "repo": "workspace-diagnostics.nvim",
+        "rev": "573ff93c47898967efdfbc6587a1a39e3c2d365e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "artemave",
+        "repo": "workspace-diagnostics.nvim",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "nixCats": "nixCats",
         "nixpkgs": "nixpkgs",
         "plugins-hover-nvim": "plugins-hover-nvim",
-        "plugins-nvim-tree": "plugins-nvim-tree"
+        "plugins-nvim-tree": "plugins-nvim-tree",
+        "plugins-workspace-diagnostics-nvim": "plugins-workspace-diagnostics-nvim"
       }
     }
   },

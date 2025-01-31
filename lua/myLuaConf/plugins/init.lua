@@ -133,6 +133,7 @@ require('lze').load {
       require("scrollbar.handlers.search").setup()
     end,
   },
+  -- PG: Mouse hover info
   {
     "hover.nvim",
     for_cat = "general.extra",
@@ -174,6 +175,22 @@ require('lze').load {
       vim.keymap.set('n', '<MouseMove>', require('hover').hover_mouse, { desc = "hover.nvim (mouse)" })
       vim.o.mousemoveevent = true
     end
+  },
+  {
+    "workspace-diagnostics.nvim",
+    for_cat = "general.always",
+    keys = {
+      {
+        "<leader>wd",
+        function()
+          for _, client in ipairs(vim.lsp.get_clients()) do
+            require("workspace-diagnostics").populate_workspace_diagnostics(client, 0)
+          end
+        end,
+        mode = "n",
+        desc = "[W]orkspace [D]iagnostics"
+      }
+    },
   },
   {
     "lazydev.nvim",

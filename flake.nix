@@ -55,6 +55,11 @@
       flake = false;
     };
 
+    "plugins-workspace-diagnostics-nvim" = {
+      url = "github:artemave/workspace-diagnostics.nvim";
+      flake = false;
+    };
+
     # neovim-nightly-overlay = {
     #   url = "github:nix-community/neovim-nightly-overlay";
     # };
@@ -262,6 +267,9 @@
             # PG: Cool and featureful scrollbar
             nvim-scrollbar
             nvim-hlslens
+
+            # PG: workspace diagnostics
+            { name = "workspace-diagnostics.nvim"; plugin = pkgs.neovimPlugins.workspace-diagnostics-nvim; }
           ];
           extra = with pkgs.vimPlugins; [
             fidget-nvim
