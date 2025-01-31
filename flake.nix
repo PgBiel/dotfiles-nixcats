@@ -238,6 +238,9 @@
             cmp-cmdline-history
             lspkind-nvim
 
+            # PG: Improved completions?
+            blink-cmp
+            blink-compat
           ];
           treesitter = with pkgs.vimPlugins; [
             nvim-treesitter-textobjects

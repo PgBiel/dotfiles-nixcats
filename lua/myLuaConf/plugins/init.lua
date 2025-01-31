@@ -50,7 +50,10 @@ end
 require('lze').load {
   { import = "myLuaConf.plugins.telescope", },
   { import = "myLuaConf.plugins.treesitter", },
-  { import = "myLuaConf.plugins.completion", },
+  -- { import = "myLuaConf.plugins.completion", },
+
+  -- PG: Let's try out new completion with blink.cmp
+  { import = "myLuaConf.plugins.blink-cmp", },
 
   -- PG: Add nvim-tree for directory browsing
   -- Loads lazily on the commands and keys below
