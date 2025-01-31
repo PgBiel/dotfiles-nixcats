@@ -18,6 +18,23 @@ return {
         -- See the full "keymap" documentation for information on defining your own keymap.
         keymap = { preset = 'enter' },
 
+        completion = {
+          menu = {
+            -- Don't show completion on search
+            auto_show = function(ctx)
+              return ctx.mode ~= "cmdline" or not vim.tbl_contains({ '/', '?' }, vim.fn.getcmdtype())
+            end,
+          },
+          list = {
+            selection = {
+              -- Don't auto-select a command on cmdline mode
+              -- (annoying when I just want to type ':q')
+              preselect = function(ctx) return ctx.mode ~= 'cmdline' end,
+              auto_insert = function(ctx) return ctx.mode ~= 'cmdline' end
+            },
+          },
+        },
+
         appearance = {
           -- Sets the fallback highlight groups to nvim-cmp's highlight groups
           -- Useful for when your theme doesn't support blink.cmp
