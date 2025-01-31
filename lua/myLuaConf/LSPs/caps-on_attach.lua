@@ -1,5 +1,5 @@
 local M = {}
-function M.on_attach(_, bufnr)
+function M.on_attach(client, bufnr)
   -- we create a function that lets us more easily define mappings specific
   -- for LSP related items. It sets the mode, buffer and description for us each time.
 
@@ -17,7 +17,11 @@ function M.on_attach(_, bufnr)
   end, '[T]oggle inline [D]iagnostics')
 
   nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
-  nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
+
+  -- PG: Rustaceanvim has its own code action logic
+  if vim.bo[bufnr].filetype ~= "rust" then
+    nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
+  end
 
   nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
 

@@ -241,6 +241,14 @@ require('lze').load {
       }
     },
   },
+  -- PG: Rust extras
+  {
+    -- Note: configuration in LSPs/init.lua
+    "rustaceanvim",
+    for_cat = "general.extra",
+    cmd = { "RustLsp" },
+    ft = "rust",
+  },
   {
     "lazydev.nvim",
     for_cat = 'neonixdev',

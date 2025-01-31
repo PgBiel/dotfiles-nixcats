@@ -288,6 +288,9 @@
 
             # PG: Display diagnostics nicely
             trouble-nvim
+
+            # PG: Rust extras
+            rustaceanvim
           ];
         };
       };

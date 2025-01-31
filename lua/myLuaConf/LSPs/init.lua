@@ -70,10 +70,26 @@ end
 if true then
   local on_attach = function(client, bufnr)
     -- require("completion").on_attach(client) -- i think this is already handled
-    vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+    vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })-- rustaceanvim overrides
+    vim.keymap.set(
+      "n",
+      "<leader>ca",
+      function()
+        vim.cmd.RustLsp('codeAction') -- supports rust-analyzer's grouping
+        -- or vim.lsp.buf.codeAction() if you don't want grouping.
+      end,
+      { silent = true, buffer = bufnr, desc = "Rust: [C]ode [A]ction" }
+    )
+    vim.keymap.set(
+      "n",
+      "K",  -- Override Neovim's built-in hover keymap with rustaceanvim's hover actions
+      function()
+        vim.cmd.RustLsp({'hover', 'actions'})
+      end,
+      { silent = true, buffer = bufnr, desc = "Hover (Rustacean)" }
+    )
   end
-  servers.rust_analyzer = {
-    on_attach = on_attach,
+  local rust_analyzer = {
     diagnostics = {
       enable = true,
       experimental = {
@@ -93,6 +109,21 @@ if true then
     },
     procMacro = {
       enable = true
+    },
+  }
+
+  -- Configure rustaceanvim, with extensions on top of base R-A
+  vim.g.rustaceanvim = {
+    tools = {
+      -- Don't run cargo clippy on each save,
+      -- rather run just cargo check
+      enable_clippy = false,
+    },
+    server = {
+      on_attach = on_attach,
+      default_settings = {
+        ["rust-analyzer"] = rust_analyzer,
+      },
     },
   }
 end
