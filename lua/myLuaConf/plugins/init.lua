@@ -176,6 +176,7 @@ require('lze').load {
       vim.o.mousemoveevent = true
     end
   },
+  -- PG: trouble.nvim for diagnostics
   {
     "trouble.nvim",
     for_cat = "general.extra",
@@ -223,6 +224,7 @@ require('lze').load {
       require("trouble").setup()
     end
   },
+  -- PG: Show all workspace diagnostics
   {
     "workspace-diagnostics.nvim",
     for_cat = "general.always",
