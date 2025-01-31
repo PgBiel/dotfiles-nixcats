@@ -31,6 +31,23 @@
         "type": "github"
       }
     },
+    "plugins-hover-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1738292569,
+        "narHash": "sha256-QmxwkXJltqIr5uWTAYyMYfph5ysEpsIEZeVCwDkKQnY=",
+        "owner": "PgBiel",
+        "repo": "hover.nvim",
+        "rev": "bb7ef7fdf93af92caa21f50723f2f43e26e5ac49",
+        "type": "github"
+      },
+      "original": {
+        "owner": "PgBiel",
+        "ref": "treesitter-highlighting",
+        "repo": "hover.nvim",
+        "type": "github"
+      }
+    },
     "plugins-nvim-tree": {
       "flake": false,
       "locked": {
@@ -51,6 +68,7 @@
       "inputs": {
         "nixCats": "nixCats",
         "nixpkgs": "nixpkgs",
+        "plugins-hover-nvim": "plugins-hover-nvim",
         "plugins-nvim-tree": "plugins-nvim-tree"
       }
     }

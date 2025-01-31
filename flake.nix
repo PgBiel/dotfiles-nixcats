@@ -49,6 +49,12 @@
       flake = false;
     };
 
+    # Temporary workaround to fix syntax highlighting
+    "plugins-hover-nvim" = {
+      url = "github:PgBiel/hover.nvim/treesitter-highlighting";
+      flake = false;
+    };
+
     # neovim-nightly-overlay = {
     #   url = "github:nix-community/neovim-nightly-overlay";
     # };
@@ -265,6 +271,9 @@
             undotree
             indent-blankline-nvim
             vim-startuptime
+
+            # PG: Display hover info on hover
+            { name = "hover.nvim"; plugin = pkgs.neovimPlugins.hover-nvim; }
             # If it was included in your flake inputs as plugins-hlargs,
             # this would be how to add that plugin in your config.
             # pkgs.neovimPlugins.hlargs
