@@ -252,6 +252,23 @@ require('lze').load {
     cmd = { "RustLsp" },
     ft = "rust",
   },
+  -- PG: Type ( and get () for free!
+  {
+    "nvim-autopairs",
+    for_cat = "general.always",
+    event = "DeferredUIEnter",
+    after = function(_)
+      require("nvim-autopairs").setup({
+        check_ts = true,
+        -- Don't add autopairs inside those treesitter nodes
+        -- (e.g. inside strings)
+        ts_config = {
+          lua = {"string"},
+          rust = {"string_literal"},
+        },
+      })
+    end,
+  },
   {
     "lazydev.nvim",
     for_cat = 'neonixdev',

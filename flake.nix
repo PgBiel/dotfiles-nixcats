@@ -273,6 +273,9 @@
 
             # PG: workspace diagnostics
             { name = "workspace-diagnostics.nvim"; plugin = pkgs.neovimPlugins.workspace-diagnostics-nvim; }
+
+            # PG: Type ( and get () for free!
+            nvim-autopairs
           ];
           extra = with pkgs.vimPlugins; [
             fidget-nvim
