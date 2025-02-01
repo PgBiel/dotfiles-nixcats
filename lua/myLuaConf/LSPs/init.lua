@@ -147,6 +147,19 @@ end
 -- servers.tsserver = {},
 -- servers.html = { filetypes = { 'html', 'twig', 'hbs'} },
 
+-- PG: Update diagnostic signs (https://github.com/folke/trouble.nvim/issues/52):
+
+local signs = {
+    Error = " ",
+    Warn = " ",
+    Hint = "󰌵 ",
+    Info = " "
+}
+
+for type, icon in pairs(signs) do
+    local hl = "DiagnosticSign" .. type
+    vim.fn.sign_define(hl, {text = icon, texthl = hl, numhl = hl})
+end
 
 if not require('nixCatsUtils').isNixCats and nixCats('lspDebugMode') then
   vim.lsp.set_log_level("debug")
