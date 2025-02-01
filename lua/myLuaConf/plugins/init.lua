@@ -293,6 +293,32 @@ require('lze').load {
       }
     end
   },
+  -- PG: Toggleterm - easy terminal window
+  {
+    "toggleterm.nvim",
+    for_cat = "general.extra",
+    cmd = { "ToggleTerm", "ToggleTermToggleAll", "TermExec", "TermSelect" },
+    keys = {
+      {"<leader>T", "", mode = "n", desc = "Toggle Terminal"}
+    },
+    after = function(_)
+      require("toggleterm").setup({
+        open_mapping = [[<leader>T]],
+        direction = "horizontal",
+        on_open = function(_)
+          if vim.fn.exists('&winfixbuf') > 0 then
+            -- Ensure we don't replace the terminal with some other file
+            vim.wo.winfixbuf = true
+          end
+        end,
+
+        -- Don't check for mappings in insert mode
+        -- (Lags on every space...)
+        insert_mappings = false,
+        terminal_mappings = false,
+      })
+    end
+  },
   {
     "lazydev.nvim",
     for_cat = 'neonixdev',
@@ -441,7 +467,7 @@ require('lze').load {
           -- lualine_b = { 'lsp_progress', },
           lualine_z = { 'tabs' }
         },
-        extensions = {"nvim-tree"}, -- PG: custom status line for nvim-tree
+        extensions = {"nvim-tree", "toggleterm"}, -- PG: custom status line for nvim-tree and toggleterm
       })
     end,
   },

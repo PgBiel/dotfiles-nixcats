@@ -2,6 +2,11 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+if vim.fn.executable("nu") == 1 then
+  -- set default shell to nushell
+  vim.o.shell = vim.fn.exepath("nu")
+end
+
 if os.getenv('WAYLAND_DISPLAY') and vim.fn.exepath('wl-copy') ~= "" then
   vim.g.clipboard = {
       name = 'wl-clipboard',
@@ -126,7 +131,9 @@ vim.keymap.set("n", "<leader><leader>l", "<cmd>b#<CR>", { desc = 'Last buffer' }
 -- PG: see https://stackoverflow.com/questions/1444322/how-can-i-close-a-buffer-without-closing-the-window
 vim.keymap.set("n", "<leader><leader>d", "<cmd>bprevious<CR><cmd>bdelete #<CR>", { desc = 'safe delete buffer' })
 vim.keymap.set("n", "<leader><leader>D", "<cmd>bdelete<CR>", { desc = 'delete this buffer' })
-vim.keymap.set("n", "<leader>Tt", "<cmd>belowright split<CR><cmd>terminal<CR>", { desc = "open terminal" })
+
+-- This is already set in toggleterm setup
+-- vim.keymap.set("n", "<leader>Tt", "<cmd>belowright split<CR><cmd>terminal<CR>", { desc = "open terminal" })
 
 -- PG: save on Ctrl-S
 -- see https://stackoverflow.com/questions/3446320/in-vim-how-to-map-save-to-ctrl-s

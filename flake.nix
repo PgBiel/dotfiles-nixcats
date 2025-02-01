@@ -306,6 +306,9 @@
             # PG: Multibuffer search
             # (Displays editable search results with surrounding context)
             { name = "ctrlsf.vim"; plugin = pkgs.neovimPlugins.ctrlsf-vim; }
+
+            # PG: Terminal window
+            toggleterm-nvim
           ];
         };
       };
