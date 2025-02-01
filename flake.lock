@@ -31,6 +31,22 @@
         "type": "github"
       }
     },
+    "plugins-ctrlsf-vim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1662087703,
+        "narHash": "sha256-td8eE5t1t5xBAxYq19U5fQXMXS1ZIxAzl2Q6nsIRR6Q=",
+        "owner": "dyng",
+        "repo": "ctrlsf.vim",
+        "rev": "32236a8b376d9311dec9b5fe795ca99d32060b13",
+        "type": "github"
+      },
+      "original": {
+        "owner": "dyng",
+        "repo": "ctrlsf.vim",
+        "type": "github"
+      }
+    },
     "plugins-hover-nvim": {
       "flake": false,
       "locked": {
@@ -84,6 +100,7 @@
       "inputs": {
         "nixCats": "nixCats",
         "nixpkgs": "nixpkgs",
+        "plugins-ctrlsf-vim": "plugins-ctrlsf-vim",
         "plugins-hover-nvim": "plugins-hover-nvim",
         "plugins-nvim-tree": "plugins-nvim-tree",
         "plugins-workspace-diagnostics-nvim": "plugins-workspace-diagnostics-nvim"

@@ -60,6 +60,11 @@
       flake = false;
     };
 
+    "plugins-ctrlsf-vim" = {
+      url = "github:dyng/ctrlsf.vim";
+      flake = false;
+    };
+
     # neovim-nightly-overlay = {
     #   url = "github:nix-community/neovim-nightly-overlay";
     # };
@@ -297,6 +302,10 @@
 
             # PG: Rust extras
             rustaceanvim
+
+            # PG: Multibuffer search
+            # (Displays editable search results with surrounding context)
+            { name = "ctrlsf.vim"; plugin = pkgs.neovimPlugins.ctrlsf-vim; }
           ];
         };
       };

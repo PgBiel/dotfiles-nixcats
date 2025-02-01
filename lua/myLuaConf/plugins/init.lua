@@ -269,6 +269,30 @@ require('lze').load {
       })
     end,
   },
+  -- PG: Search multibuffer (editable results with context)
+  {
+    "ctrlsf.vim",
+    for_cat = "general.extra",
+    cmd = { "CtrlSF", "CtrlSFOpen", "CtrlSFToggle", },
+    keys = {
+      {"<leader>ff", "<Plug>CtrlSFPrompt", mode = "n", remap = true, desc = "CtrlS[F]: [F]ind"},
+      {"<leader>ff", "<Plug>CtrlSFVwordPath", mode = "v", remap = true, desc = "CtrlS[F]: [F]ind selected word"},
+      {"<leader>ft", "<Cmd>CtrlSFToggle<CR>", mode = "n", remap = true, desc = "CtrlS[F]: [T]oggle panel"},
+    },
+    after = function(_)
+      -- Automatically focus on the search results
+      vim.g.ctrlsf_auto_focus = { at = "start", }
+      -- Show preview of each file as we walk through results
+      vim.g.ctrlsf_auto_preview = true
+      vim.g.ctrlsf_mapping = {
+        -- Remove "o" mapping to open (use it for newline so we can edit on the buffer)
+        open = "<CR>",
+        openb = {},
+        next = "<C-J>",
+        prev = "<C-K>",
+      }
+    end
+  },
   {
     "lazydev.nvim",
     for_cat = 'neonixdev',
