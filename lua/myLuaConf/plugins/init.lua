@@ -405,12 +405,22 @@ require('lze').load {
 
       require('lualine').setup({
         options = {
-          icons_enabled = false,
+          icons_enabled = true,  -- PG: Show filetype and other icons!
           theme = colorschemeName,
           component_separators = '|',
           section_separators = '',
+          globalstatus = true, -- PG: Don't show a status for each buffer
         },
         sections = {
+          lualine_b = {
+            'branch',
+            'diff',
+            -- PG: Update diagnostic icons
+            {
+              'diagnostics',
+              symbols = {error = ' ', warn = ' ', info = ' ', hint = '󰌵 '},
+            },
+          },
           lualine_c = {
             {
               'filename', path = 1, status = true,
@@ -431,6 +441,7 @@ require('lze').load {
           -- lualine_b = { 'lsp_progress', },
           lualine_z = { 'tabs' }
         },
+        extensions = {"nvim-tree"}, -- PG: custom status line for nvim-tree
       })
     end,
   },
