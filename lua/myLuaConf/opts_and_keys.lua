@@ -144,6 +144,17 @@ vim.keymap.set("v", "<C-s>", "<Esc><cmd>w<CR>", { desc = "Save" })
 -- PG: <C-I> and <Tab> are the same on terminals, so remap Ctrl+P to Ctrl+I
 vim.keymap.set("n", "<C-p>", "<C-I>", { remap = false })
 
+-- PG: Window movements
+vim.keymap.set("n", "<A-h>", "<C-w>h")
+vim.keymap.set("n", "<A-j>", "<C-w>j")
+vim.keymap.set("n", "<A-k>", "<C-w>k")
+vim.keymap.set("n", "<A-l>", "<C-w>l")
+
+vim.keymap.set({"i", "t"}, "<A-h>", "<C-\\><C-n><C-w>h")
+vim.keymap.set({"i", "t"}, "<A-j>", "<C-\\><C-n><C-w>j")
+vim.keymap.set({"i", "t"}, "<A-k>", "<C-\\><C-n><C-w>k")
+vim.keymap.set({"i", "t"}, "<A-l>", "<C-\\><C-n><C-w>l")
+
 -- see help sticky keys on windows
 vim.cmd([[command! W w]])
 vim.cmd([[command! Wq wq]])
@@ -178,5 +189,4 @@ vim.keymap.set({"n", "v", "x"}, '<C-a>', 'gg0vG$', { noremap = true, silent = tr
 vim.keymap.set({'n', 'v', 'x'}, '<leader>p', '"+p', { noremap = true, silent = true, desc = 'Paste from clipboard' })
 vim.keymap.set('i', '<C-p>', '<C-r><C-p>+', { noremap = true, silent = true, desc = 'Paste from clipboard from within insert mode' })
 vim.keymap.set("x", "<leader>P", '"_dP', { noremap = true, silent = true, desc = 'Paste over selection without erasing unnamed register' })
-
 
