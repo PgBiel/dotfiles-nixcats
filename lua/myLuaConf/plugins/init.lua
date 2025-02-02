@@ -319,6 +319,13 @@ require('lze').load {
       })
     end
   },
+  -- PG: Colored icons (for bufferline, arrow, lualine, ...)
+  {
+    "nvim-web-devicons",
+    for_cat = "general.extra",
+    event = "DeferredUIEnter",
+    dep_of = {"arrow.nvim", "lualine.nvim"},
+  },
   {
     "lazydev.nvim",
     for_cat = 'neonixdev',
