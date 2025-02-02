@@ -65,6 +65,12 @@
       flake = false;
     };
 
+    # Temporary workaround to avoid opening buffers onto terminal
+    "plugins-lualine-nvim" = {
+      url = "github:PgBiel/lualine.nvim/avoid-winfixbuf";
+      flake = false;
+    };
+
     # neovim-nightly-overlay = {
     #   url = "github:nix-community/neovim-nightly-overlay";
     # };
@@ -265,7 +271,8 @@
           ];
           always = with pkgs.vimPlugins; [
             nvim-lspconfig
-            lualine-nvim
+            # lualine-nvim
+            { name = "lualine.nvim"; plugin = pkgs.neovimPlugins.lualine-nvim; }
             gitsigns-nvim
             vim-sleuth
             vim-fugitive

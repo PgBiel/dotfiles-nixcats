@@ -64,6 +64,23 @@
         "type": "github"
       }
     },
+    "plugins-lualine-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1738473904,
+        "narHash": "sha256-KAaWv4Ty/Aqj0GaAs88+5xGOHCX70Nyq1W3VrW4LMes=",
+        "owner": "PgBiel",
+        "repo": "lualine.nvim",
+        "rev": "06b03f6fe9c85c51573e8e01347122ef7a96f340",
+        "type": "github"
+      },
+      "original": {
+        "owner": "PgBiel",
+        "ref": "avoid-winfixbuf",
+        "repo": "lualine.nvim",
+        "type": "github"
+      }
+    },
     "plugins-nvim-tree": {
       "flake": false,
       "locked": {
@@ -102,6 +119,7 @@
         "nixpkgs": "nixpkgs",
         "plugins-ctrlsf-vim": "plugins-ctrlsf-vim",
         "plugins-hover-nvim": "plugins-hover-nvim",
+        "plugins-lualine-nvim": "plugins-lualine-nvim",
         "plugins-nvim-tree": "plugins-nvim-tree",
         "plugins-workspace-diagnostics-nvim": "plugins-workspace-diagnostics-nvim"
       }
