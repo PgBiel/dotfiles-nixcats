@@ -326,6 +326,24 @@ require('lze').load {
     event = "DeferredUIEnter",
     dep_of = {"arrow.nvim", "lualine.nvim"},
   },
+  -- PG: Arrow for quick navigation
+  -- Use ';' to bookmark certain files
+  -- Use 'm' to bookmark certain locations within a file
+  -- TODO: Consider using harpoon 2 instead?
+  {
+    "arrow.nvim",
+    keys = {
+      {";", "", mode = "n", desc = "Arrow File Mappings"},
+      {"m", "", mode = "n", desc = "Arrow Buffer Mappings"},
+    },
+    after = function(_)
+      require("arrow").setup({
+        show_icons = true,
+        leader_key = ";",  -- Prefix for per-file bookmark operations
+        buffer_leader_key = "m",  -- Prefix for in-buffer bookmark operations
+      })
+    end,
+  },
   {
     "lazydev.nvim",
     for_cat = 'neonixdev',

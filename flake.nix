@@ -316,6 +316,9 @@
 
             # PG: Terminal window
             toggleterm-nvim
+
+            # PG: Arrow for bookmarking
+            arrow-nvim
           ];
         };
       };
