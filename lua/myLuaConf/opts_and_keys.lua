@@ -155,6 +155,17 @@ vim.keymap.set({"i", "t"}, "<A-j>", "<C-\\><C-n><C-w>j")
 vim.keymap.set({"i", "t"}, "<A-k>", "<C-\\><C-n><C-w>k")
 vim.keymap.set({"i", "t"}, "<A-l>", "<C-\\><C-n><C-w>l")
 
+-- PG: Window movements (arrows)
+vim.keymap.set("n", "<A-Left>", "<C-w>h")
+vim.keymap.set("n", "<A-Down>", "<C-w>j")
+vim.keymap.set("n", "<A-Up>", "<C-w>k")
+vim.keymap.set("n", "<A-Right>", "<C-w>l")
+
+vim.keymap.set({"i", "t"}, "<A-Left>", "<C-\\><C-n><C-w>h")
+vim.keymap.set({"i", "t"}, "<A-Down>", "<C-\\><C-n><C-w>j")
+vim.keymap.set({"i", "t"}, "<A-Up>", "<C-\\><C-n><C-w>k")
+vim.keymap.set({"i", "t"}, "<A-Right>", "<C-\\><C-n><C-w>l")
+
 -- see help sticky keys on windows
 vim.cmd([[command! W w]])
 vim.cmd([[command! Wq wq]])
