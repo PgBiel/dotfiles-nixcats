@@ -332,6 +332,7 @@ require('lze').load {
   -- TODO: Consider using harpoon 2 instead?
   {
     "arrow.nvim",
+    for_cat = "general.extra",
     keys = {
       {";", "", mode = "n", desc = "Arrow File Mappings"},
       {"m", "", mode = "n", desc = "Arrow Buffer Mappings"},
