@@ -22,7 +22,11 @@ return {
           menu = {
             -- Don't show completion on search
             auto_show = function(ctx)
-              return ctx.mode ~= "cmdline" or not vim.tbl_contains({ '/', '?' }, vim.fn.getcmdtype())
+              -- Don't show in search multibuffer
+              local forbiddenFiletypes = { "grug-far" }
+
+              return ctx.mode == "cmdline" and not vim.tbl_contains({ '/', '?' }, vim.fn.getcmdtype())
+                or ctx.mode ~= "cmdline" and not vim.tbl_contains(forbiddenFiletypes, vim.bo.filetype)
             end,
           },
           list = {

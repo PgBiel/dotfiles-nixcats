@@ -345,6 +345,87 @@ require('lze').load {
       })
     end,
   },
+  -- PG: Search buffer facilities (similar to CtrlSF but more versatile)
+  {
+    "grug-far.nvim",
+    for_cat = "general.extra",
+    cmd = { "GrugFar" },
+    keys = {
+      -- Note: use <leader>S for grug-specific commands after running search
+      -- Use <leader>Sc to close
+      {"<leader>Sg", "<Cmd>GrugFar<CR>", mode = "n", desc = "Grugfar [S]earch"},
+      {"<leader>Sg", function() require('grug-far').with_visual_selection({}) end, mode = "v", desc = "Grugfar [S]earch Selection"},
+      {"<leader>S/", function() require('grug-far').open({ prefills = { paths = vim.fn.expand("%") } }) end, mode = "n", desc = "Grugfar [S]earch in File"},
+      {"<leader>S/", function() require('grug-far').with_visual_selection({ prefills = { paths = vim.fn.expand("%") } }) end, mode = "v", desc = "Grugfar [S]earch Selection in File"},
+    },
+    after = function(_)
+      local keymaps = require("grug-far.opts").defaultOptions.keymaps
+      local newKeymaps = {}
+      for name, keymap in pairs(keymaps) do
+        if keymap["n"] ~= nil then
+          -- Grug-specific keybinds go under <leader>S
+          newKeymaps[name] = { n = string.gsub(keymap.n, "<localleader>", "<leader>S"), }
+        end
+      end
+
+      -- Now, our own overrides
+      newKeymaps = vim.tbl_extend("force", newKeymaps, {
+        -- Shows the 'rg ...' invocation, exotic enough for uppercase X
+        toggleShowCommand = { n = "<leader>SX" },
+        -- Use 'p' for preview instead of 'i'
+        -- We will use 'i' to toggle case (in)sensitivity
+        previewLocation = { n = "<leader>Sp" },
+      })
+
+      -- Custom keybindings in the search multibuffer
+      vim.api.nvim_create_autocmd('FileType', {
+        group = vim.api.nvim_create_augroup('grug-far-keymap', { clear = true }),
+        pattern = { 'grug-far' },
+        callback = function()
+          -- Jump back to search input by hitting shift up in normal mode:
+          vim.keymap.set('n', '<S-Up>', function()
+            vim.api.nvim_win_set_cursor(vim.fn.bufwinid(0), { 2, 0 })
+          end, { buffer = true, desc = "grug-far: Return to search input" })
+
+          -- Hit Ctrl-Enter to close search.
+          vim.keymap.set('n', '<C-enter>', '<leader>So<leader>Sc', { buffer = true, desc = "grug-far: Open and close search" })
+
+          -- Hit <leader>Si to toggle case insensitivity.
+          vim.keymap.set("n", "<leader>Si", function()
+            local state = unpack(require('grug-far').toggle_flags({ '-s' }))
+            vim.notify('grug-far: toggled -s (--case-sensitive) ' .. (state and 'ON' or 'OFF'))
+          end, { buffer = true, desc = "grug-far: Toggle case (in)sensitivity" })
+
+          -- Hit <leader>SC to toggle "-C 0" (no context).
+          vim.keymap.set("n", "<leader>SC", function()
+            local state = unpack(require('grug-far').toggle_flags({ '-C 0' }))
+            vim.notify('grug-far: toggled -C 0 (no line context) ' .. (state and 'ON' or 'OFF'))
+          end, { buffer = true, desc = "grug-far: Toggle line context (-C 0)" })
+
+          -- Hit <leader>SF to toggle "--fixed-strings" (no regex)
+          vim.keymap.set("n", "<leader>SF", function()
+            local state = unpack(require('grug-far').toggle_flags({ '--fixed-strings' }))
+            vim.notify('grug-far: toggled --fixed-strings (no regex) ' .. (state and 'ON' or 'OFF'))
+          end, { buffer = true, desc = "grug-far: Toggle literal (non-regex) search (--fixed-strings)" })
+        end,
+      })
+
+      require("grug-far").setup({
+        keymaps = newKeymaps,
+        engines = {
+          ripgrep = {
+            -- Always add some context lines around the results
+            -- Start with case insensitivity by default
+            extraArgs = "-C 5 -i",
+            placeholders = {
+              -- Since we start with ignore-case (-i), suggest the opposite, as well as -C 0
+              flags = "e.g. --help --case-sensitive (-s) -C 0 (remove context) --replace= (empty replace) --multiline (-U)",
+            },
+          },
+        },
+      })
+    end
+  },
   {
     "lazydev.nvim",
     for_cat = 'neonixdev',

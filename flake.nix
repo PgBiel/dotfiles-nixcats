@@ -319,6 +319,10 @@
 
             # PG: Arrow for bookmarking
             arrow-nvim
+
+            # PG: Search and replace in a multibuffer 2
+            # (Another option besides Ctrl-SF, seems more modern)
+            grug-far-nvim
           ];
         };
       };
