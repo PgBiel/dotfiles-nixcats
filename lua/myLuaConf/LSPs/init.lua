@@ -128,6 +128,9 @@ if true then
   }
 end
 
+-- PG: Nushell LSP
+servers.nushell = {}
+
 -- This is this flake's version of what kickstarter has set up for mason handlers.
 -- This is a convenience function that calls lspconfig on the lsps we downloaded via nix
 -- This will not download your lsp. Nix does that.
