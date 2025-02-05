@@ -132,6 +132,12 @@ vim.keymap.set("n", "<leader><leader>l", "<cmd>b#<CR>", { desc = 'Last buffer' }
 vim.keymap.set("n", "<leader><leader>d", "<cmd>bprevious<CR><cmd>bdelete #<CR>", { desc = 'safe delete buffer' })
 vim.keymap.set("n", "<leader><leader>D", "<cmd>bdelete<CR>", { desc = 'delete this buffer' })
 
+-- PG: :BufferBomb deletes all buffers but this one
+-- :BufferBomb! also forcefully deletes modified buffers and terminals
+-- Source: a comment in https://stackoverflow.com/questions/4545275/vim-close-all-buffers-but-this-one
+vim.api.nvim_create_user_command("BufferBomb", "%bd<bang>|e#|bd<bang>#", { bang = true })
+vim.keymap.set("n", "<leader><leader>B", "<cmd>BufferBomb<CR>", { desc = "Delete all other buffers" })
+
 -- This is already set in toggleterm setup
 -- vim.keymap.set("n", "<leader>Tt", "<cmd>belowright split<CR><cmd>terminal<CR>", { desc = "open terminal" })
 
