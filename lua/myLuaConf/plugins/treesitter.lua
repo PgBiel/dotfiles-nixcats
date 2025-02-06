@@ -14,6 +14,22 @@ return {
         vim.cmd.packadd("nvim-treesitter-textobjects")
     end,
     after = function (plugin)
+      -- PG: Fix folding (za, ...): use treesitter if available, otherwise vim regex
+      -- check if treesitter has parser
+      -- Link: https://stackoverflow.com/questions/78077278/treesitter-and-syntax-folding
+      vim.api.nvim_create_autocmd({ "FileType" }, {
+        callback = function()
+          if require("nvim-treesitter.parsers").has_parser() then
+            -- fold based on treesitter syntax
+            vim.opt.foldmethod = "expr"
+            vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+          else
+            -- use alternative method (vim regex)
+            vim.opt.foldmethod = "syntax"
+          end
+        end,
+      })
+
       -- [[ Configure Treesitter ]]
       -- See `:help nvim-treesitter`
       require('nvim-treesitter.configs').setup {

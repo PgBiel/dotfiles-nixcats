@@ -66,6 +66,9 @@ vim.keymap.set("i", "<S-Tab>", "<C-D>", { desc = 'Dedent' })
 vim.keymap.set("v", "<Tab>", ">gv", { desc = 'Indent' })
 vim.keymap.set("v", "<S-Tab>", "<gv", { desc = 'Dedent' })
 
+-- PG: Ensure folds don't start closed on startup
+vim.o.foldenable = false
+
 -- stops line wrapping from being confusing
 vim.o.breakindent = true
 
