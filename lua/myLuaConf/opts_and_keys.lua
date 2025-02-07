@@ -47,6 +47,9 @@ vim.wo.number = true
 -- Enable mouse mode
 vim.o.mouse = 'a'
 
+-- PG: Mouse scroll speed
+vim.opt.mousescroll = "ver:6,hor:6"
+
 -- Indent defaults (4 spaces)
 -- vim.o.smarttab = true
 vim.opt.cpoptions:append('I')
