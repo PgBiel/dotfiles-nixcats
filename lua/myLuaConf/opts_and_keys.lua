@@ -136,6 +136,10 @@ vim.keymap.set("n", "<leader><leader>[", "<cmd>bprev<CR>", { desc = 'Previous bu
 vim.keymap.set("n", "<leader><leader>]", "<cmd>bnext<CR>", { desc = 'Next buffer' })
 vim.keymap.set("n", "<leader><leader>l", "<cmd>b#<CR>", { desc = 'Last buffer' })
 
+-- PG: Faster buffer operations
+vim.keymap.set("n", "<leader><Tab>", "<cmd>bnext<CR>", { desc = 'Next buffer' })
+vim.keymap.set("n", "<leader>b", "<leader><leader>s", { desc = 'Search buffer' })
+
 -- PG: see https://stackoverflow.com/questions/1444322/how-can-i-close-a-buffer-without-closing-the-window
 vim.keymap.set("n", "<leader><leader>d", "<cmd>bprevious<CR><cmd>bdelete #<CR>", { desc = 'safe delete buffer' })
 vim.keymap.set("n", "<leader><leader>D", "<cmd>bdelete<CR>", { desc = 'delete this buffer' })
