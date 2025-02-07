@@ -162,9 +162,6 @@ vim.keymap.set("v", "<C-s>", "<Esc><cmd>w<CR>", { desc = "Save" })
 -- PG: <C-I> and <Tab> are the same on terminals, so remap Ctrl+P to Ctrl+I
 vim.keymap.set("n", "<C-p>", "<C-I>", { remap = false })
 
--- PG: hover (left-hand)
-vim.keymap.set("n", "T", "K", { desc = "Hover shortcut" })
-
 -- PG: Window movements
 vim.keymap.set("n", "<A-h>", "<C-w>h")
 vim.keymap.set("n", "<A-j>", "<C-w>j")

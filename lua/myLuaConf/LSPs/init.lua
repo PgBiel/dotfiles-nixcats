@@ -88,6 +88,14 @@ if true then
       end,
       { silent = true, buffer = bufnr, desc = "Hover (Rustacean)" }
     )
+    vim.keymap.set(
+      "n",
+      "T",  -- Override Neovim's built-in hover keymap with rustaceanvim's hover actions
+      function()
+        vim.cmd.RustLsp({'hover', 'actions'})
+      end,
+      { silent = true, buffer = bufnr, desc = "Hover (Rustacean - shortcut)" }
+    )
   end
   local rust_analyzer = {
     diagnostics = {
