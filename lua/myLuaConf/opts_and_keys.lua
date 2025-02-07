@@ -175,6 +175,21 @@ vim.keymap.set({"i", "t"}, "<A-Down>", "<C-\\><C-n><C-w>j")
 vim.keymap.set({"i", "t"}, "<A-Up>", "<C-\\><C-n><C-w>k")
 vim.keymap.set({"i", "t"}, "<A-Right>", "<C-\\><C-n><C-w>l")
 
+-- PG: Left-hand movements
+vim.keymap.set("n", "<A-s>", "<C-d>", { desc = "Scroll Down" })
+vim.keymap.set("n", "<A-w>", "<C-u>", { desc = "Scroll Up" })
+vim.keymap.set("n", "<C-f>", "/", { desc = "Search in File" })
+vim.keymap.set("n", "<C-r>", "<C-o>", { desc = "Go Back" })
+vim.keymap.set("n", "<C-t>", "<C-i>", { desc = "Go Forward" })
+vim.keymap.set("n", "<A-a>", "h", { desc = "Left" })
+vim.keymap.set("n", "<A-d>", "l", { desc = "Right" })
+
+vim.keymap.set({"i", "v"}, "<A-s>", "<Esc><C-d>")
+vim.keymap.set({"i", "v"}, "<A-w>", "<Esc><C-u>")
+vim.keymap.set({"i", "v"}, "<C-f>", "<Esc>/")
+vim.keymap.set({"i", "v"}, "<A-a>", "<Left>")
+vim.keymap.set({"i", "v"}, "<A-d>", "<Right>")
+
 -- see help sticky keys on windows
 vim.cmd([[command! W w]])
 vim.cmd([[command! Wq wq]])
