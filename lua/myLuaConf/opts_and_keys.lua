@@ -2,10 +2,12 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
-if vim.fn.executable("nu") == 1 then
-  -- set default shell to nushell
-  vim.o.shell = vim.fn.exepath("nu")
-end
+-- PG: This is a bit problematic since some commands depend on posix shell syntax
+-- We should set this directly on toggleterm instead
+-- if vim.fn.executable("nu") == 1 then
+--   -- set default shell to nushell
+--   vim.o.shell = vim.fn.exepath("nu")
+-- end
 
 if os.getenv('WAYLAND_DISPLAY') and vim.fn.exepath('wl-copy') ~= "" then
   vim.g.clipboard = {

@@ -302,6 +302,11 @@ require('lze').load {
       {"<leader>T", "", mode = "n", desc = "Toggle Terminal"}
     },
     after = function(_)
+      local shell = vim.o.shell
+      if vim.fn.executable("nu") == 1 then
+        -- Don't set it to nu globally as some plugins rely on posix shell syntax
+        shell = vim.fn.exepath("nu")
+      end
       require("toggleterm").setup({
         open_mapping = [[<leader>T]],
         direction = "horizontal",
@@ -311,6 +316,8 @@ require('lze').load {
             vim.wo.winfixbuf = true
           end
         end,
+
+        shell = shell,
 
         -- Don't check for mappings in insert mode
         -- (Lags on every space...)
