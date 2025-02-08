@@ -326,6 +326,10 @@
             # PG: Search and replace in a multibuffer 2
             # (Another option besides Ctrl-SF, seems more modern)
             grug-far-nvim
+
+            # PG: Quickly go to any visible word or node by typing
+            # <keybind> + two-letter combination
+            flash-nvim
           ];
         };
       };
