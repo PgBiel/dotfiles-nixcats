@@ -433,6 +433,24 @@ require('lze').load {
       })
     end
   },
+  -- PG: Guess how to much to indent file by based on contents.
+  {
+    "guess-indent.nvim",
+    for_cat = "general.extra",
+    cmd = { "GuessIndent" },
+    event = "DeferredUIEnter",
+    after = function(_)
+      require("guess-indent").setup({
+        filetype_exclude = {
+          "netrw",
+          "tutor",
+          "NvimTree",
+          "grug-far",
+          "ctrlsf",
+        }
+      })
+    end
+  },
   {
     "lazydev.nvim",
     for_cat = 'neonixdev',

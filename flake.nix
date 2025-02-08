@@ -298,6 +298,9 @@
             indent-blankline-nvim
             vim-startuptime
 
+            # PG: Guess file indent level based on contents
+            guess-indent-nvim
+
             # PG: Display hover info on hover
             { name = "hover.nvim"; plugin = pkgs.neovimPlugins.hover-nvim; }
             # If it was included in your flake inputs as plugins-hlargs,
