@@ -150,8 +150,8 @@ require('lze').load {
               -- require('hover.providers.gh_user')
               -- require('hover.providers.jira')
               -- require('hover.providers.dap')
-              -- require('hover.providers.fold_preview')
-              -- require('hover.providers.diagnostic')
+              require('hover.providers.fold_preview')
+              require('hover.providers.diagnostic')
               -- require('hover.providers.man')
               -- require('hover.providers.dictionary')
           end,
@@ -163,7 +163,9 @@ require('lze').load {
           preview_window = false,
           title = true,
           mouse_providers = {
-              'LSP'
+            "LSP",
+            "Diagnostics",
+            "Fold Preview",
           },
           mouse_delay = 1000
       }
