@@ -50,16 +50,16 @@
     "plugins-hover-nvim": {
       "flake": false,
       "locked": {
-        "lastModified": 1738292569,
-        "narHash": "sha256-QmxwkXJltqIr5uWTAYyMYfph5ysEpsIEZeVCwDkKQnY=",
+        "lastModified": 1738992207,
+        "narHash": "sha256-t67RYDHPMlOgisOcDj1gd+WVrdwDdIfbnHCb3erVboI=",
         "owner": "PgBiel",
         "repo": "hover.nvim",
-        "rev": "bb7ef7fdf93af92caa21f50723f2f43e26e5ac49",
+        "rev": "45ecdec1bec05d24c71157b382acb8b5491055de",
         "type": "github"
       },
       "original": {
         "owner": "PgBiel",
-        "ref": "treesitter-highlighting",
+        "ref": "diagnostic-fix-plus-treesitter",
         "repo": "hover.nvim",
         "type": "github"
       }
