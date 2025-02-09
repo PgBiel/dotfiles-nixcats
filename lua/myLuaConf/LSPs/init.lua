@@ -142,6 +142,13 @@ servers.nushell = {}
 -- PG: Gleam LSP
 servers.gleam = {}
 
+-- PG: Typst LSP (only if tinymist is installed)
+if vim.fn.executable("tinymist") == 1 then
+  servers.tinymist = {
+    formatterMode = "typstyle",
+  }
+end
+
 -- This is this flake's version of what kickstarter has set up for mason handlers.
 -- This is a convenience function that calls lspconfig on the lsps we downloaded via nix
 -- This will not download your lsp. Nix does that.
