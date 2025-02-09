@@ -528,7 +528,22 @@ require('lze').load {
     event = "DeferredUIEnter",
     -- keys = "",
     after = function(plugin)
-      require('nvim-surround').setup()
+      -- PG: Remove whitespace around delimiters
+      -- (See https://github.com/kylechui/nvim-surround/issues/122)
+      require('nvim-surround').setup({
+        surrounds = {
+          ["("] = false,
+          ["["] = false,
+          ["{"] = false,
+          ["<"] = false,
+        },
+        aliases = {
+          ["("] = ")",
+          ["["] = "]",
+          ["{"] = "}",
+          ["<"] = ">",
+        },
+      })
     end,
   },
   {
