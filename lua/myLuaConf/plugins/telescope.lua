@@ -90,12 +90,18 @@ return {
       { "<leader>sf", function() return require('telescope.builtin').find_files() end, mode = {"n"}, desc = '[S]earch [F]iles', },
       { "<leader>sk", function() return require('telescope.builtin').keymaps() end, mode = {"n"}, desc = '[S]earch [K]eymaps', },
       { "<leader>sh", function() return require('telescope.builtin').help_tags() end, mode = {"n"}, desc = '[S]earch [H]elp', },
+
+      -- PG: ast-grep search
+      { "<leader>sa", "<cmd>Telescope ast_grep<CR>", mode = {"n"}, desc = '[S]earch with [A]st-grep', },
     },
     -- colorscheme = "",
     load = function (name)
         vim.cmd.packadd(name)
         vim.cmd.packadd("telescope-fzf-native.nvim")
         vim.cmd.packadd("telescope-ui-select.nvim")
+
+        -- PG: ast-grep extension
+        vim.cmd.packadd("telescope-sg")
     end,
     after = function (plugin)
       require('telescope').setup {
@@ -118,6 +124,9 @@ return {
       -- Enable telescope extensions, if they are installed
       pcall(require('telescope').load_extension, 'fzf')
       pcall(require('telescope').load_extension, 'ui-select')
+
+      -- PG: ast-grep extension
+      pcall(require('telescope').load_extension, 'ast_grep')
 
       vim.api.nvim_create_user_command('LiveGrepGitRoot', live_grep_git_root, {})
     end,

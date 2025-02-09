@@ -140,6 +140,9 @@
           universal-ctags
           ripgrep
           fd
+
+          # PG: ast-grep: search syntax nodes, e.g. $FUNC($$$ARGS)
+          ast-grep
         ];
         # these names are arbitrary.
         lint = with pkgs; [
@@ -268,6 +271,9 @@
             telescope-fzf-native-nvim
             telescope-ui-select-nvim
             telescope-nvim
+
+            # PG: Allow ast-grep in telescope
+            telescope-sg
           ];
           always = with pkgs.vimPlugins; [
             nvim-lspconfig
