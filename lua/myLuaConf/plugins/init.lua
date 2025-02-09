@@ -362,10 +362,14 @@ require('lze').load {
     keys = {
       -- Note: use <leader>S for grug-specific commands after running search
       -- Use <leader>Sc to close
-      {"<leader>Sg", "<Cmd>GrugFar<CR>", mode = "n", desc = "Grugfar [S]earch"},
-      {"<leader>Sg", function() require('grug-far').with_visual_selection({}) end, mode = "v", desc = "Grugfar [S]earch Selection"},
+      {"<leader>Sg", function() require('grug-far').open({ engine = 'ripgrep' }) end, mode = "n", desc = "Grugfar [S]earch with rip[G]rep"},
+      {"<leader>Sg", function() require('grug-far').with_visual_selection({ engine = 'ripgrep' }) end, mode = "v", desc = "Grugfar [S]earch Selection with rip[G]rep"},
+      {"<leader>Sa", function() require('grug-far').open({ engine = 'astgrep' }) end, mode = "n", desc = "Grugfar [S]earch with [A]st-grep"},
+      {"<leader>Sa", function() require('grug-far').with_visual_selection({ engine = 'astgrep' }) end, mode = "v", desc = "Grugfar [S]earch Selection with [A]st-grep"},
       {"<leader>S/", function() require('grug-far').open({ prefills = { paths = vim.fn.expand("%") } }) end, mode = "n", desc = "Grugfar [S]earch in File"},
       {"<leader>S/", function() require('grug-far').with_visual_selection({ prefills = { paths = vim.fn.expand("%") } }) end, mode = "v", desc = "Grugfar [S]earch Selection in File"},
+      {"<leader>SA", function() require('grug-far').open({ engine = 'astgrep', prefills = { paths = vim.fn.expand("%") } }) end, mode = "n", desc = "Grugfar [S]earch in File with [A]st-grep"},
+      {"<leader>SA", function() require('grug-far').with_visual_selection({ engine = 'astgrep', prefills = { paths = vim.fn.expand("%") } }) end, mode = "v", desc = "Grugfar [S]earch Selection in File with [A]st-grep"},
     },
     after = function(_)
       local keymaps = require("grug-far.opts").defaultOptions.keymaps
