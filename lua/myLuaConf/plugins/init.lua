@@ -88,6 +88,11 @@ require('lze').load {
         update_focused_file = {
           enable = true,
         },
+        filters = {
+          -- Show .gitignored files by default
+          -- (they have a special indicator anyway)
+          git_ignored = false,
+        },
       }
     end,
   },
