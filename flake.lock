@@ -50,11 +50,11 @@
     "plugins-hover-nvim": {
       "flake": false,
       "locked": {
-        "lastModified": 1739034885,
-        "narHash": "sha256-z4ns498GG7o8NoWZoAnfNr4WikI/fSIvxtxvXfyRt5o=",
+        "lastModified": 1744257270,
+        "narHash": "sha256-YRf84EbU4BAZmgwqftW+jVTTEwLMSodMcaBbGvi6Km8=",
         "owner": "PgBiel",
         "repo": "hover.nvim",
-        "rev": "655faadfebf9f2d6f9e1c5b9b822a86760a28c49",
+        "rev": "c8fc0c62b455679b331d58ab705c333b199eac93",
         "type": "github"
       },
       "original": {
