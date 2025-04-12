@@ -49,9 +49,8 @@
       flake = false;
     };
 
-    # Temporary workaround to fix syntax highlighting and diagnostic position
     "plugins-hover-nvim" = {
-      url = "github:PgBiel/hover.nvim/diagnostic-fix-plus-treesitter";
+      url = "github:lewis6991/hover.nvim";
       flake = false;
     };
 
