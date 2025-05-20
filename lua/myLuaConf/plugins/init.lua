@@ -348,13 +348,13 @@ require('lze').load {
     "arrow.nvim",
     for_cat = "general.extra",
     keys = {
-      {";", "", mode = "n", desc = "Arrow File Mappings"},
+      {"<leader>af", "", mode = "n", desc = "Arrow File Mappings"},
       {"m", "", mode = "n", desc = "Arrow Buffer Mappings"},
     },
     after = function(_)
       require("arrow").setup({
         show_icons = true,
-        leader_key = ";",  -- Prefix for per-file bookmark operations
+        leader_key = "<leader>af",  -- Prefix for per-file bookmark operations
         buffer_leader_key = "m",  -- Prefix for in-buffer bookmark operations
       })
     end,
