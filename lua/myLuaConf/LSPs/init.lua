@@ -80,10 +80,26 @@ local signs = {
     Info = " "
 }
 
+local signConf = {
+  text = {},
+  texthl = {},
+  numhl = {},
+}
+
 for type, icon in pairs(signs) do
-    local hl = "DiagnosticSign" .. type
-    vim.fn.sign_define(hl, {text = icon, texthl = hl, numhl = hl})
+  local severityName = string.upper(type)
+  local severity = vim.diagnostic.severity[severityName]
+  local hl = "DiagnosticSign" .. type
+  signConf.text[severity] = icon
+  signConf.texthl[severity] = hl
+  signConf.numhl[severity] = hl
 end
+
+vim.diagnostic.config({
+  signs = signConf,
+})
+
+----
 
 local catUtils = require('nixCatsUtils')
 if (catUtils.isNixCats and nixCats('lspDebugMode')) then
