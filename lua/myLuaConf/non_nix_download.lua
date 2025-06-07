@@ -1,9 +1,7 @@
 -- load the plugins via paq-nvim when not on nix
 -- YOU are in charge of putting the plugin
--- urls and build steps in there, which will only be used when not on nix,
--- and you should keep any setup functions
--- OUT of that file, as they are ONLY loaded when this
--- configuration is NOT loaded via nix.
+-- urls and build steps in here, which will only be used when not on nix.
+-- and you should keep any setup functions OUT of this file
 
 -- again, you dont need this file if you only use nix to load the config,
 -- this is a fallback only, and is optional.
@@ -24,11 +22,13 @@ require('nixCatsUtils.catPacker').setup({
 --[[ we dont have to write it twice.            ]]
 --[[ ------------------------------------------ ]]
   { "BirdeeHub/lze", },
+  { "BirdeeHub/lzextras", },
   { "stevearc/oil.nvim", },
   { 'joshdick/onedark.vim', },
   { 'nvim-tree/nvim-web-devicons', },
   { 'nvim-lua/plenary.nvim', },
   { 'tpope/vim-repeat', },
+  { 'rcarriga/nvim-notify', },
 
   { 'nvim-treesitter/nvim-treesitter-textobjects', opt = true, },
   { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate', opt = true, },
@@ -49,18 +49,11 @@ require('nixCatsUtils.catPacker').setup({
   { 'folke/lazydev.nvim', opt = true, },
 
   -- completion
-  { 'onsails/lspkind.nvim', opt = true, },
   { 'L3MON4D3/LuaSnip', opt = true, as = "luasnip", },
-  { 'saadparwaiz1/cmp_luasnip', opt = true, },
-  { 'hrsh7th/cmp-nvim-lsp', opt = true, },
-  { 'hrsh7th/cmp-nvim-lua', opt = true, },
-  { 'hrsh7th/cmp-nvim-lsp-signature-help', opt = true, },
-  { 'hrsh7th/cmp-path', opt = true, },
-  { 'rafamadriz/friendly-snippets', opt = true, },
-  { 'hrsh7th/cmp-buffer', opt = true, },
   { 'hrsh7th/cmp-cmdline', opt = true, },
-  { 'dmitmel/cmp-cmdline-history', opt = true, },
-  { 'hrsh7th/nvim-cmp', opt = true, },
+  { 'Saghen/blink.cmp', opt = true, },
+  { 'Saghen/blink.compat', opt = true, },
+  { 'xzbdmw/colorful-menu.nvim', opt = true, },
 
   -- lint and format
   { 'mfussenegger/nvim-lint', opt = true, },

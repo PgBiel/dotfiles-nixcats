@@ -1,5 +1,4 @@
-local M = {}
-function M.on_attach(client, bufnr)
+return function(_client, bufnr)
   -- we create a function that lets us more easily define mappings specific
   -- for LSP related items. It sets the mode, buffer and description for us each time.
 
@@ -58,17 +57,3 @@ function M.on_attach(client, bufnr)
   end, { desc = 'Format current buffer with LSP' })
 
 end
-
-function M.get_capabilities(server_name)
-  -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
-  -- if you make a package without it, make sure to check if it exists with nixCats!
-  local capabilities = vim.lsp.protocol.make_client_capabilities()
-  -- PG: Let's ask blink.cmp to do this for us.
-  -- if nixCats('general.cmp') then
-  --   capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
-  -- end
-  -- capabilities.textDocument.completion.completionItem.snippetSupport = true
-  capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
-  return capabilities
-end
-return M

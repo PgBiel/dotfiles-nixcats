@@ -7,6 +7,19 @@ end
 -- this is just an example, feel free to do a better job!
 vim.cmd.colorscheme(colorschemeName)
 
+local ok, notify = pcall(require, "notify")
+if ok then
+  notify.setup({
+    on_open = function(win)
+      vim.api.nvim_win_set_config(win, { focusable = false })
+    end,
+  })
+  vim.notify = notify
+  vim.keymap.set("n", "<Esc>", function()
+      notify.dismiss({ silent = true, })
+  end, { desc = "dismiss notify popup and clear hlsearch" })
+end
+
 -- NOTE: you can check if you included the category with the thing wherever you want.
 if nixCats('general.extra') then
   -- I didnt want to bother with lazy loading this.
@@ -18,6 +31,9 @@ if nixCats('general.extra') then
   vim.g.loaded_netrwPlugin = 1
   require("oil").setup({
     default_file_explorer = true,
+    view_options = {
+      show_hidden = true
+    },
     columns = {
       "icon",
       "permissions",
@@ -474,19 +490,6 @@ require('lze').load {
       { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
       { "<leader>zs", mode = "n", function() require("flash").toggle() end, desc = "Toggle Flash Search" },
     },
-  },
-  {
-    "lazydev.nvim",
-    for_cat = 'neonixdev',
-    cmd = { "LazyDev" },
-    ft = "lua",
-    after = function(plugin)
-      require('lazydev').setup({
-        library = {
-          { words = { "nixCats" }, path = (require('nixCats').nixCatsPath or "") .. '/lua' },
-        },
-      })
-    end,
   },
   {
     "markdown-preview.nvim",

@@ -123,7 +123,7 @@
     # see :help nixCats.flake.outputs.categories
     # and
     # :help nixCats.flake.outputs.categoryDefinitions.scheme
-    categoryDefinitions = { pkgs, settings, categories, extra, name, mkNvimPlugin, ... }@packageDef: {
+    categoryDefinitions = { pkgs, settings, categories, extra, name, mkPlugin, ... }@packageDef: {
       # to define and use a new category, simply add a new list to a set here, 
       # and later, you will include categoryname = true; in the set you
       # provide when you build the package using this builder function.
@@ -177,8 +177,10 @@
           # (always isnt a special name, just the one I chose for this subcategory)
           always = [
             lze
+            lzextras
             vim-repeat
             plenary-nvim
+            nvim-notify
 
             # PG: nvim-tree
             pkgs.neovimPlugins.nvim-tree
@@ -236,24 +238,13 @@
           lazydev-nvim
         ];
         general = {
-          cmp = with pkgs.vimPlugins; [
-            # cmp stuff
+          blink = with pkgs.vimPlugins; [
             nvim-cmp
             luasnip
-            friendly-snippets
-            cmp_luasnip
-            cmp-buffer
-            cmp-path
-            cmp-nvim-lua
-            cmp-nvim-lsp
             cmp-cmdline
-            cmp-nvim-lsp-signature-help
-            cmp-cmdline-history
-            lspkind-nvim
-
-            # PG: Improved completions?
             blink-cmp
             blink-compat
+            colorful-menu-nvim
           ];
           treesitter = with pkgs.vimPlugins; [
             nvim-treesitter-textobjects
@@ -380,7 +371,7 @@
       # in your lua config via
       # vim.g.python3_host_prog
       # or run from nvim terminal via :!<packagename>-python3
-      extraPython3Packages = {
+      python3.libraries = {
         test = (_:[]);
       };
       # populates $LUA_PATH and $LUA_CPATH
@@ -423,10 +414,12 @@
     packageDefinitions = {
       # the name here is the name of the package
       # and also the default command name for it.
-      nixCats = { pkgs, ... }@misc: {
+      nixCats = { pkgs, name, ... }@misc: {
         # these also recieve our pkgs variable
         # see :help nixCats.flake.outputs.packageDefinitions
         settings = {
+          suffix-path = true;
+          suffix-LD = true;
           # The name of the package, and the default launch name,
           # and the name of the .desktop file, is `nixCats`,
           # or, whatever you named the package definition in the packageDefinitions set.
@@ -439,6 +432,8 @@
           wrapRc = true;
           configDirName = "nixCats-nvim";
           # neovim-unwrapped = inputs.neovim-nightly-overlay.packages.${pkgs.system}.neovim;
+          hosts.python3.enable = true;
+          hosts.node.enable = true;
         };
         # enable the categories you want from categoryDefinitions
         categories = {
@@ -468,12 +463,15 @@
           # there is also an extra table you can use to pass extra stuff.
           # but you can pass all the same stuff in any of these sets and access it in lua
           nixdExtras = {
-            nixpkgs = nixpkgs;
+            nixpkgs = ''import ${pkgs.path} {}'';
+            # or inherit nixpkgs;;
           };
         };
       };
       regularCats = { pkgs, ... }@misc: {
         settings = {
+          suffix-path = true;
+          suffix-LD = true;
           # IMPURE PACKAGE: normal config reload
           # include same categories as main config,
           # will load from vim.fn.stdpath('config')
@@ -511,7 +509,8 @@
           # even though path.to.cat would be an indexing error in that case.
           # this is to mimic the concept of "subcategories" but may get in the way of just fetching values.
           nixdExtras = {
-            nixpkgs = nixpkgs;
+            nixpkgs = ''import ${pkgs.path} {}'';
+            # or inherit nixpkgs;
           };
           # yes even tortured inputs work.
           theBestCat = "says meow!!";
@@ -522,7 +521,7 @@
                 thing3 = [ "give" "treat" ];
               }
               "I LOVE KEYBOARDS"
-              (utils.n2l.types.inline-safe.mk ''[[I am a]] .. [[ lua ]] .. type("value")'')
+              (utils.mkLuaInline ''[[I am a]] .. [[ lua ]] .. type("value")'')
             ];
             thing4 = "couch is for scratching";
           };
@@ -587,11 +586,13 @@
   }) // (let
     # we also export a nixos module to allow reconfiguration from configuration.nix
     nixosModule = utils.mkNixosModules {
+      moduleNamespace = [ defaultPackageName ];
       inherit defaultPackageName dependencyOverlays luaPath
         categoryDefinitions packageDefinitions extra_pkg_config nixpkgs;
     };
     # and the same for home manager
     homeModule = utils.mkHomeModules {
+      moduleNamespace = [ defaultPackageName ];
       inherit defaultPackageName dependencyOverlays luaPath
         categoryDefinitions packageDefinitions extra_pkg_config nixpkgs;
     };
