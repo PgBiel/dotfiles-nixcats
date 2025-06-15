@@ -293,5 +293,11 @@ require('lze').load {
         }
       }
     }
+  },
+  -- PG: Rust extras
+  {
+    "rustaceanvim",
+    for_cat = "general.extra",
+    event = "DeferredUIEnter",
   }
 }
