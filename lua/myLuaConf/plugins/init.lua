@@ -322,7 +322,7 @@ require('lze').load {
     for_cat = "general.extra",
     cmd = { "ToggleTerm", "ToggleTermToggleAll", "TermExec", "TermSelect" },
     keys = {
-      {"<leader>T", "", mode = "n", desc = "Toggle Terminal"}
+      {"<leader>T", "<Cmd>ToggleTerm<CR>", mode = "n", desc = "Toggle Terminal"}
     },
     after = function(_)
       local shell = vim.o.shell
