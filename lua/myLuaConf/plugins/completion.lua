@@ -53,7 +53,15 @@ return {
           enabled = true,
           completion = {
             menu = {
-              auto_show = true,
+              -- auto_show = true,
+              -- PG: Don't show completion on search
+              auto_show = function(ctx)
+                -- Don't show in search multibuffer
+                local forbiddenFiletypes = { "grug-far" }
+
+                return ctx.mode == "cmdline" and not vim.tbl_contains({ '/', '?' }, vim.fn.getcmdtype())
+                  or ctx.mode ~= "cmdline" and not vim.tbl_contains(forbiddenFiletypes, vim.bo.filetype)
+              end,
             },
           },
           sources = function()
